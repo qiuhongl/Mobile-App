@@ -66,6 +66,7 @@ export default class LoginScreen extends React.Component {
       } else {
         console.log(`Logging in with session token: ${json.token}`);
 
+        SecureStore.setItemAsync('userID', json.userID.toString());
         // enter login logic here
         SecureStore.setItemAsync('session', json.token).then(() => {
         this.props.route.params.onLoggedIn();

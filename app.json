@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "expo-template-tabs",
+    "name": "MobileProject_Part1_lacking_qiuhongl",
+    "slug": "afterschoolsociety-lacking-qiuhongl",
     "platforms": [
       "ios",
       "android",
@@ -24,6 +24,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Upgrade SDK to 38.0,0"
   }
 }

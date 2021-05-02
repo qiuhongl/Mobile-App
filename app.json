@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "MobileProject_Part1_lacking_qiuhongl",
+    "name": "MobileProject_Part2_lacking_qiuhongl",
     "slug": "afterschoolsociety-lacking-qiuhongl",
     "platforms": [
       "ios",
@@ -25,6 +25,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Upgrade SDK to 38.0,0"
+    "description": "Clear values in post content and post title after making a post"
   }
 }

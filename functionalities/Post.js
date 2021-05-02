@@ -22,6 +22,11 @@ export function post(props) {
     fetch(url, requestOptions)
         .then(response => response.json())
         .then(result =>{
+            // Clear the value
+            props.setState({
+                post_title: "",
+                post_message: ""
+            })
             console.log("Post is created");
         })
         .catch(error => console.log('error', error));

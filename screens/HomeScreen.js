@@ -1,9 +1,8 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Modal, Alert, TextInput } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Modal, Alert, TextInput } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as SecureStore from 'expo-secure-store';
-import { MonoText } from '../components/StyledText';
 import { formatDate } from '../functionalities/Post.js';
 
 function Post(props) {
@@ -132,9 +131,9 @@ export default class HomeScreen extends React.Component {
       import("../functionalities/Post.js").then(posts =>{
         posts.post(this);
       })
-      this.setModalVisible(!this.state.modalVisible, this.state.warning);
+      this.setModalVisible(!this.state.modalVisible);
     } else {
-      this.setState({warning: "Error: Cannot leave the title or the content empty."}, () => {this.setSubModalVisible(true);});
+      this.setState({warning: "Oops! You probably forgot to write on the title or the content."}, () => {this.setSubModalVisible(true);});
     }
   }
 
@@ -142,6 +141,15 @@ export default class HomeScreen extends React.Component {
     import("../functionalities/Post.js").then(posts => {
       posts.getPost(this);
     })
+  }
+
+  cancelPost = (visible) => {
+    this.setModalVisible(visible);
+    // Clear the value
+    this.setState({
+      post_title: "",
+      post_message: ""
+    });
   }
 
   render() {
@@ -200,7 +208,6 @@ export default class HomeScreen extends React.Component {
                 autoCapitalize={'words'}
                 onChangeText={text => this.setState({post_title: text})}
                 value={post_title}
-                textContentType="emailAddress"
               />
 
               <TextInput
@@ -211,12 +218,11 @@ export default class HomeScreen extends React.Component {
                 autoCapitalize={'sentences'}
                 onChangeText={text => this.setState({post_message: text})}
                 value={post_message}
-                textContentType="emailAddress"
               />
 
               <TouchableOpacity
                 style={styles.cancelButton}
-                onPress={() => this.setModalVisible(!modalVisible)}
+                onPress={() => this.cancelPost(!modalVisible)}
               >
                 <Text style={styles.textStyle}>Cancel</Text>
               </TouchableOpacity>
@@ -410,11 +416,11 @@ const styles = StyleSheet.create({
   innerModalView: {
     width: '40%',
     height: '15%',
-    backgroundColor: "gray",
+    backgroundColor: "orange",
     borderRadius: 20,
     paddingHorizontal: 10,
     alignItems: "center",
-    shadowColor: "gray",
+    shadowColor: "black",
     shadowOffset: {
       width: 0,
       height: 2
@@ -423,26 +429,28 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     borderColor: 'black',
-    borderWidth: 1,
   },
   button: {
     position: 'absolute',
-    bottom: '10%',
+    bottom: '5%',
     borderColor: 'black',
-    borderWidth: 1,
     borderRadius: 10,
     padding: 10,
     elevation: 2
   },
   buttonClose: {
     backgroundColor: "red",
+    shadowOffset: { width: 1, height: 2 },
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
   modalText: {
     position: 'absolute',
-    top: '10%',
+    top: '8%',
     fontSize: 16,
     marginBottom: 15,
     textAlign: "center",
-    color: 'red'
+    color: 'white'
   }
 });
